@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "real prototype refactored.sln"
+    "dotnet.defaultSolution": "realPrototypeRefactored.sln"
 }

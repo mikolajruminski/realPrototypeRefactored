@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D playerRB;
 
 
-    [SerializeField] private float speed = 7f;
-    [SerializeField] private float dashMultiplier = 15f;
-    [SerializeField] private float dashTimeDuration = 1f;
-    [SerializeField] private float dashTimeCooldown = 2f;
+    private float speed = 7f;
+    private float dashMultiplier = 3f;
+    private float dashTimeDuration = 1f;
+    private float dashTimeCooldown = 2f;
 
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private Transform groundCheck;
@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
 
     private float jumpingForce = 10f;
     private float fallMultiplier = 4f;
-    private float lowJumpMultiplier = 2f;
     private float ladderSpeed = 8f;
     private float playerGravity;
 
@@ -36,6 +35,7 @@ public class Player : MonoBehaviour
     private bool isClimbing;
     private bool isLadder;
 
+    //Knockup effect from stomping an enemy, script in the "Head Stomper" component
     private void Awake()
     {
         Instance = this;
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (isDashing)
@@ -190,5 +189,10 @@ public class Player : MonoBehaviour
         {
             canDoubleJump = true;
         }
+    }
+
+    public Rigidbody2D GetPlayerRB()
+    {
+        return playerRB;
     }
 }
