@@ -10,10 +10,12 @@ public class EnemyAI : MonoBehaviour
 
     private enum State
     {
+        BackIntoBoundaries,
         ChangingDirection,
         Patrolling,
         Detected,
         Chasing,
+        ChaseEnded,
     }
     private State state;
 
@@ -21,7 +23,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Color gizmoDetectedColor;
     [SerializeField] private Vector2 detectorSize = Vector2.one;
     [SerializeField] private Vector2 detectorOriginOffset = Vector2.zero;
-    [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private LayerMask playerLayerMask, groundLayerMask;
+    [SerializeField] private Transform groundCheck;
+
 
     private Rigidbody2D enemyRB;
     private Enemy enemy;
@@ -49,15 +53,34 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(IsInBoundaries());
+        Debug.Log(state);
         switch (state)
         {
+            case State.BackIntoBoundaries:
+                Vector2 boundaryOffset = new Vector2(3, 0);
+                if (Vector2.Distance(transform.position, boundaryX2Position) < Vector2.Distance(transform.position, boundaryXPosition))
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, boundaryX2Position - boundaryOffset, enemy.GetSpeed() * Time.deltaTime);
+                }
+                else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, boundaryXPosition + boundaryOffset, enemy.GetSpeed() * Time.deltaTime);
+                }
+
+                if (IsInBoundaries())
+                {
+                    state = State.Patrolling;
+                    dirX *= -1;
+                }
+
+
+                break;
             case State.ChangingDirection:
-                Debug.Log(state);
                 StartCoroutine(WaitAndChangeDirection());
                 state = State.Patrolling;
                 break;
             case State.Patrolling:
-                Debug.Log(state);
                 EnemyMovement();
                 ChangeDirectionWhenApproachingBoundaries();
                 PlayerDetectionBox();
@@ -69,7 +92,6 @@ public class EnemyAI : MonoBehaviour
 
                 break;
             case State.Detected:
-
                 StartCoroutine(WaitAndResumeMovement());
                 state = State.Chasing;
                 break;
@@ -78,8 +100,9 @@ public class EnemyAI : MonoBehaviour
                 PlayerDetectionBox();
                 ChasePlayer(detectedPlayer);
                 break;
-
-
+            case State.ChaseEnded:
+                GetBackIntoBoundaries();
+                break;
         }
     }
     private void PlayerDetectionBox()
@@ -105,18 +128,22 @@ public class EnemyAI : MonoBehaviour
     {
         if (player != null)
         {
-            if (canMove)
+            if (canMove && GroundCheck())
             {
                 Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
                 enemyRB.velocity = new Vector2(directionToPlayer.x, 0) * enemy.GetSpeed();
 
-                ChangeDirectionWhenApproachingBoundaries();
+            }
+
+            if (!GroundCheck())
+            {
+                state = State.ChangingDirection;
             }
 
         }
         else
         {
-            state = State.Patrolling;
+            state = State.ChaseEnded;
         }
     }
 
@@ -167,16 +194,43 @@ public class EnemyAI : MonoBehaviour
     }
     private void ChangeDirectionWhenApproachingBoundaries()
     {
-        if (transform.position.x < (boundaryXPosition.x + startingPosition.x) && canDetectDirectionChange)
+        if (transform.position.x < boundaryXPosition.x && canDetectDirectionChange)
         {
             state = State.ChangingDirection;
         }
 
-        if (transform.position.x > (boundaryX2Position.x - startingPosition.x) && canDetectDirectionChange)
+        if (transform.position.x > boundaryX2Position.x && canDetectDirectionChange)
         {
             state = State.ChangingDirection;
         }
     }
+
+    private void GetBackIntoBoundaries()
+    {
+        if (transform.position.x > boundaryX2Position.x)
+        {
+            state = State.BackIntoBoundaries;
+        }
+        else if (transform.position.x < boundaryXPosition.x)
+        {
+            state = State.BackIntoBoundaries;
+        }
+        else
+        {
+            state = State.Patrolling;
+        }
+    }
+
+    private bool IsInBoundaries()
+    {
+        return (transform.position.x < boundaryX2Position.x && transform.position.x > boundaryXPosition.x);
+    }
+    private bool GroundCheck()
+    {
+        float groundCheckDetectionRadius = 0.2f;
+        return Physics2D.OverlapCircle(groundCheck.transform.position, groundCheckDetectionRadius, groundLayerMask);
+    }
+
     private IEnumerator WaitAndChangeDirection()
     {
         canDetectDirectionChange = false;
@@ -191,6 +245,5 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1f);
         canMove = true;
     }
-
 
 }
