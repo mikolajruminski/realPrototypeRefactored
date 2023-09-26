@@ -53,11 +53,11 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(IsInBoundaries());
-        Debug.Log(state);
+        Debug.Log(GroundCheck());
         switch (state)
         {
             case State.BackIntoBoundaries:
+
                 Vector2 boundaryOffset = new Vector2(3, 0);
                 if (Vector2.Distance(transform.position, boundaryX2Position) < Vector2.Distance(transform.position, boundaryXPosition))
                 {
@@ -73,8 +73,6 @@ public class EnemyAI : MonoBehaviour
                     state = State.Patrolling;
                     dirX *= -1;
                 }
-
-
                 break;
             case State.ChangingDirection:
                 StartCoroutine(WaitAndChangeDirection());
@@ -137,7 +135,7 @@ public class EnemyAI : MonoBehaviour
 
             if (!GroundCheck())
             {
-                state = State.ChangingDirection;
+                state = State.ChaseEnded;
             }
 
         }
