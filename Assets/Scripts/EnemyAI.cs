@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     private bool awareOfPlayer;
     private bool canDetectDirectionChange;
     private bool canMove;
+    private bool isFacingRight = true;
 
     private void Awake()
     {
@@ -53,7 +54,15 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(GroundCheck());
+        if (dirX > 0 && isMoving() && !isFacingRight)
+        {
+            FlipSprite();
+        }
+        if (dirX < 0 && isMoving() && isFacingRight)
+        {
+            FlipSprite();
+        }
+
         switch (state)
         {
             case State.BackIntoBoundaries:
@@ -229,6 +238,19 @@ public class EnemyAI : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.transform.position, groundCheckDetectionRadius, groundLayerMask);
     }
 
+    public bool isMoving()
+    {
+        return enemyRB.velocity.x != 0;
+    }
+
+    private void FlipSprite()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        isFacingRight = !isFacingRight;
+    }
     private IEnumerator WaitAndChangeDirection()
     {
         canDetectDirectionChange = false;
@@ -240,6 +262,17 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator WaitAndResumeMovement()
     {
         canMove = false;
+        if (enemyRB.velocity.x > 0)
+        {
+            Vector3 vel = enemyRB.velocity;
+            float velX = vel.x;
+            velX -= Time.deltaTime;
+
+            enemyRB.velocity = vel;
+            yield return null;
+            
+        }
+
         yield return new WaitForSeconds(1f);
         canMove = true;
     }

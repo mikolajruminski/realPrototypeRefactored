@@ -4,10 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public static Player Instance { get; private set; }
+    public event EventHandler OnGetDamaged;
 
+    public int Health
+    {
+        get => playerHealth;
+        set => playerHealth = value;
+    }
+
+    [SerializeField] int playerHealth = 3;
     [SerializeField] private GameInput gameInput;
     private Rigidbody2D playerRB;
 
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
     private bool isDashing;
     private bool isClimbing;
     private bool isLadder;
+    private bool canMove;
 
     //Knockup effect from stomping an enemy, script in the "Head Stomper" component
     private void Awake()
@@ -45,6 +54,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        canMove = true;
         playerGravity = playerRB.gravityScale;
         gameInput.OnJumpPerformed += gameInput_OnJumpPerformed;
         gameInput.OnJumpReleased += gameInput_OnJumpReleased;
@@ -74,12 +84,16 @@ public class Player : MonoBehaviour
     //movement section
     private void HandleMovememnt()
     {
-        Vector2 moveVector = gameInput.GetMovementVector();
+        if (canMove)
+        {
+            Vector2 moveVector = gameInput.GetMovementVector();
 
-        Vector2 moveDir = new Vector2(moveVector.x, moveVector.y);
+            Vector2 moveDir = new Vector2(moveVector.x, moveVector.y);
 
 
-        playerRB.velocity = new Vector2(moveDir.x * speed, playerRB.velocity.y);
+            playerRB.velocity = new Vector2(moveDir.x * speed, playerRB.velocity.y);
+        }
+
     }
 
     private void LadderMovement()
@@ -176,7 +190,6 @@ public class Player : MonoBehaviour
         Debug.Log("DashEnd");
     }
 
-
     private bool GroundCheck()
     {
         float groundCheckRadius = 0.2f;
@@ -194,5 +207,32 @@ public class Player : MonoBehaviour
     public Rigidbody2D GetPlayerRB()
     {
         return playerRB;
+    }
+    public void Damage(int damageAmount)
+    {
+        playerHealth -= damageAmount;
+        Debug.Log("Player health: " + playerHealth);
+    }
+
+    private IEnumerator knockbackEffect(Vector2 distance)
+    {
+        canMove = false;
+        OnGetDamaged?.Invoke(this, EventArgs.Empty);
+        playerRB.gravityScale = 0;
+        playerRB.AddForce(distance, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.2f);
+        playerRB.gravityScale = playerGravity;
+        canMove = true;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            Damage(other.gameObject.GetComponent<Enemy>().GetDamege());
+            float knockbackHeight = 0.1f;
+            Vector2 distance = new Vector2(transform.position.x - other.transform.position.x, knockbackHeight).normalized * 10f;
+            StartCoroutine(knockbackEffect(distance));
+        }
     }
 }
