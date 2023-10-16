@@ -52,16 +52,21 @@ public class EnemyAI : MonoBehaviour
         enemyRB = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.GetIsGameActive())
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (dirX > 0 && isMoving() && !isFacingRight)
-        {
-            FlipSprite();
-        }
-        if (dirX < 0 && isMoving() && isFacingRight)
-        {
-            FlipSprite();
-        }
+        FlipSprite();
 
         switch (state)
         {
@@ -137,8 +142,9 @@ public class EnemyAI : MonoBehaviour
         {
             if (canMove && GroundCheck())
             {
+                float speedChaseMultiplier = 1.5f;
                 Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
-                enemyRB.velocity = new Vector2(directionToPlayer.x, 0) * enemy.GetSpeed();
+                enemyRB.velocity = new Vector2(directionToPlayer.x, 0) * enemy.GetSpeed() * speedChaseMultiplier;
 
             }
 
@@ -245,16 +251,32 @@ public class EnemyAI : MonoBehaviour
 
     private void FlipSprite()
     {
-        Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1;
-        gameObject.transform.localScale = currentScale;
+        if (dirX > 0 && isMoving() && !isFacingRight)
+        {
+            Vector3 currentScale = gameObject.transform.localScale;
+            currentScale.x *= -1;
+            gameObject.transform.localScale = currentScale;
 
-        isFacingRight = !isFacingRight;
+            isFacingRight = !isFacingRight;
+        }
+        if (dirX < 0 && isMoving() && isFacingRight)
+        {
+            Vector3 currentScale = gameObject.transform.localScale;
+            currentScale.x *= -1;
+            gameObject.transform.localScale = currentScale;
+
+            isFacingRight = !isFacingRight;
+        }
     }
     private IEnumerator WaitAndChangeDirection()
     {
+        int minWaitTime = 1;
+        int maxWaitTime = 4;
+        canMove = false;
         canDetectDirectionChange = false;
+        yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         dirX *= -1;
+        canMove = true;
         yield return new WaitForSeconds(0.5f);
         canDetectDirectionChange = true;
     }
@@ -270,7 +292,7 @@ public class EnemyAI : MonoBehaviour
 
             enemyRB.velocity = vel;
             yield return null;
-            
+
         }
 
         yield return new WaitForSeconds(1f);

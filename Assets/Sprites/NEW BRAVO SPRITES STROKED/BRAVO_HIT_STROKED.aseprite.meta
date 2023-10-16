@@ -1,0 +1,396 @@
+fileFormatVersion: 2
+guid: 149bb559528038542bfc18f550dbad69
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: BRAVO_HIT_STROKED_Clip
+    second: {fileID: 7400000, guid: 66ebe81e314247349a6e9188e1e009c9, type: 2}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMasterTextureLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 638326319219942021
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: BRAVO_HIT_STROKED_Frame_0
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.2580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 17
+      height: 31
+    spriteID: 63e0edbd64e1835418228a5a2cb02cd4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: BRAVO_HIT_STROKED_Frame_1
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.26666668}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 29
+      y: 43
+      width: 17
+      height: 30
+    spriteID: 974bf5c82cd403e4d99a5ed55f4419af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 29, y: 43}
+  - name: BRAVO_HIT_STROKED_Frame_2
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.2580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 43
+      width: 17
+      height: 31
+    spriteID: 470dc784e72485b428a2959b16d975ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 43}
+  - name: BRAVO_HIT_STROKED_Frame_3
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.26666668}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 29
+      y: 81
+      width: 17
+      height: 30
+    spriteID: f505b22931816f9418e3702d72eef9d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 29, y: 81}
+  - name: BRAVO_HIT_STROKED_Frame_4
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.2580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 82
+      width: 17
+      height: 31
+    spriteID: f2f88a67a8a8be7419e19fa7540db909
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 82}
+  - name: BRAVO_HIT_STROKED_Frame_5
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.26666668}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 4
+      width: 17
+      height: 30
+    spriteID: bc22ef469b8356643a3ca13936c2cd25
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 4}
+  - name: BRAVO_HIT_STROKED_Frame_6
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.2580645}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 29
+      y: 4
+      width: 17
+      height: 31
+    spriteID: 770288013c14e4845b191753d771a14b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 29, y: 4}
+  - name: BRAVO_HIT_STROKED_Frame_7
+    originalName: 
+    pivot: {x: 0.5882353, y: -0.26666668}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 42
+      width: 17
+      height: 30
+    spriteID: 47582138180cd3246872471d1f5a1ae8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 42}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 30174677
+    name: BRAVO_HIT_STROKED
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: BRAVO_HIT_STROKED_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 31
+      spriteId: 63e0edbd64e1835418228a5a2cb02cd4
+    - name: BRAVO_HIT_STROKED_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 30
+      spriteId: 974bf5c82cd403e4d99a5ed55f4419af
+    - name: BRAVO_HIT_STROKED_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 31
+      spriteId: 470dc784e72485b428a2959b16d975ce
+    - name: BRAVO_HIT_STROKED_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 30
+      spriteId: f505b22931816f9418e3702d72eef9d3
+    - name: BRAVO_HIT_STROKED_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 31
+      spriteId: f2f88a67a8a8be7419e19fa7540db909
+    - name: BRAVO_HIT_STROKED_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 30
+      spriteId: bc22ef469b8356643a3ca13936c2cd25
+    - name: BRAVO_HIT_STROKED_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 31
+      spriteId: 770288013c14e4845b191753d771a14b
+    - name: BRAVO_HIT_STROKED_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 14
+        y: 8
+        width: 17
+        height: 30
+      spriteId: 47582138180cd3246872471d1f5a1ae8
+    linkedCells: []
+    parentIndex: -1
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 48, y: 48}

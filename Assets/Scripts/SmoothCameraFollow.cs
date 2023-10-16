@@ -6,7 +6,7 @@ public class SmoothCameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 offset;
-    private float smoothTime = 0.25f;
+    private float smoothTime = 0.15f;
     private Vector3 velocity = Vector3.zero;
 
     // Update is called once per frame

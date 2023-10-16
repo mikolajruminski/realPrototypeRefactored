@@ -5,6 +5,7 @@ using UnityEngine;
 public class BombBehaviour : MonoBehaviour
 {
     private Rigidbody2D bombRb;
+    private float degreesPerSecond = -800;
     public enum State
     {
         ToBottom,
@@ -19,6 +20,7 @@ public class BombBehaviour : MonoBehaviour
 
     private void Start()
     {
+
         bombRb = GetComponent<Rigidbody2D>();
 
         switch (state)
@@ -37,6 +39,12 @@ public class BombBehaviour : MonoBehaviour
                 break;
         }
     }
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 0, degreesPerSecond) * Time.deltaTime);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         Destroy(gameObject);

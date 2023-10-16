@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab54f8a56040204f8b00a0348522469, type: 3}
+  m_Name: AudioClipMenuRefSO
+  m_EditorClassIdentifier: 
+  clickBoink: {fileID: 8300000, guid: 8295aad000a855f4b9de5db75bd2a0db, type: 3}
+  playerJump: {fileID: 8300000, guid: 359777e2d99773743aa38a30bc0b78ef, type: 3}
+  jumpPadBoink: {fileID: 8300000, guid: 76b72a9ccbc9cd84b856b0c52c745f94, type: 3}
+  soundEffectMenuReference: {fileID: 8300000, guid: 2aae6922a2b471b4ca88a68ce49b95aa, type: 3}

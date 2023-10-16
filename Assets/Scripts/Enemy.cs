@@ -6,6 +6,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public event EventHandler OnGetDamaged;
+    public event EventHandler OnEnemyDeath;
+    private EnemyItemDrop enemyItemDrop;
 
     public int Health
     {
@@ -17,6 +19,11 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private int health;
     [SerializeField] private int damage;
 
+    private void Start()
+    {
+        enemyItemDrop = GetComponent<EnemyItemDrop>();
+    }
+
     public void Damage(int damageAmount)
     {
         health -= damageAmount;
@@ -25,8 +32,19 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            enemyItemDrop.Drop(transform.position);
+
+            OnEnemyDeath?.Invoke(this, EventArgs.Empty);
+            
+            this.enabled = false;
+            StartCoroutine(DestroySelf());
         }
+    }
+
+    private IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Destroy(gameObject);
     }
 
     public int GetSpeed()

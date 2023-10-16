@@ -31,13 +31,21 @@ public class BombSpawner : MonoBehaviour
     }
     private void Start()
     {
-        canSpawn = true;
+
         StartSpawning();
         SwitchState();
     }
 
     private void Update()
     {
+        if (GameManager.Instance.GetIsGameActive())
+        {
+            canSpawn = true;
+        }
+        else
+        {
+            canSpawn = false;
+        }
         bombPrefab.GetComponent<Rigidbody2D>().gravityScale = bombGravity;
         bombPrefab.GetComponent<BombBehaviour>().SetForce(bombForce);
     }
