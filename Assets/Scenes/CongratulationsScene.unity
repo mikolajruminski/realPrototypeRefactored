@@ -517,6 +517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269605505}
   - component: {fileID: 269605504}
+  - component: {fileID: 269605506}
   m_Layer: 0
   m_Name: MenuSoundManager
   m_TagString: Untagged
@@ -553,6 +554,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &269605506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269605503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: f6c58dbc2034028428344048140851aa, type: 2}
+    - {fileID: 11400000, guid: ccd39b0369786fc4dbb16ef670d5b954, type: 2}
+    - {fileID: 11400000, guid: ff6e75ef36a5a184d9452c2709073800, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 269605504}
+          m_TargetAssemblyTypeName: MenuSoundManager, Assembly-CSharp
+          m_MethodName: PlayCongratulationsSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 269605504}
+          m_TargetAssemblyTypeName: MenuSoundManager, Assembly-CSharp
+          m_MethodName: PlayFootstepSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 269605504}
+          m_TargetAssemblyTypeName: MenuSoundManager, Assembly-CSharp
+          m_MethodName: PlayWoodenSound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 269605504}
+          m_TargetAssemblyTypeName: MenuSoundManager, Assembly-CSharp
+          m_MethodName: PlayCreakyPointerSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &286874505
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,9 +7378,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f96d3706679ea5b428b882e9f17b46eb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6ee50fa75c5ff584fa94b392c63f63c9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7534,6 +7610,10 @@ PlayableDirector:
     value: {fileID: 695627472}
   - key: {fileID: 3308958433336880051, guid: bb37bc2f4ae1155489ecce1ddd6b57f3, type: 2}
     value: {fileID: 1152977927}
+  - key: {fileID: 6917458658088326935, guid: bb37bc2f4ae1155489ecce1ddd6b57f3, type: 2}
+    value: {fileID: 269605506}
+  - key: {fileID: 912877360330323167, guid: bb37bc2f4ae1155489ecce1ddd6b57f3, type: 2}
+    value: {fileID: 269605506}
   m_ExposedReferences:
     m_References:
     - ebb60cf0b9c58354eb882e2695ad0488: {fileID: 911588299}

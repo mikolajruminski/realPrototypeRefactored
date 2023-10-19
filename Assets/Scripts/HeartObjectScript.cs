@@ -6,6 +6,12 @@ using UnityEngine;
 public class HeartObjectScript : MonoBehaviour
 {
     public event EventHandler OnPlayerTriggerEntered;
+    public static event EventHandler OnHeartPowerUpPickedUp;
+
+    public static void ResetStaticData()
+    {
+        OnHeartPowerUpPickedUp = null;
+    }
     [SerializeField] private float amplitude = 0.5f;
     [SerializeField] private float frequency = 1f;
     Vector3 posOffset = new Vector3();
@@ -31,6 +37,8 @@ public class HeartObjectScript : MonoBehaviour
             {
                 PlayerDamage.Instance.Health++;
                 OnPlayerTriggerEntered?.Invoke(this, EventArgs.Empty);
+                OnHeartPowerUpPickedUp?.Invoke(this, EventArgs.Empty);
+                DestroySelf();
             }
         }
     }

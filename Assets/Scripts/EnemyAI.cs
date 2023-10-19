@@ -67,6 +67,7 @@ public class EnemyAI : MonoBehaviour
     private void FixedUpdate()
     {
         FlipSprite();
+        Debug.Log(state);
 
         switch (state)
         {
@@ -85,7 +86,6 @@ public class EnemyAI : MonoBehaviour
                 if (IsInBoundaries())
                 {
                     state = State.Patrolling;
-                    dirX *= -1;
                 }
                 break;
             case State.ChangingDirection:
@@ -94,7 +94,11 @@ public class EnemyAI : MonoBehaviour
                 break;
             case State.Patrolling:
                 EnemyMovement();
-                ChangeDirectionWhenApproachingBoundaries();
+                if (canDetectDirectionChange)
+                {
+                    ChangeDirectionWhenApproachingBoundaries();
+                }
+
                 PlayerDetectionBox();
 
                 if (detectedPlayer != null)
@@ -113,7 +117,7 @@ public class EnemyAI : MonoBehaviour
                 ChasePlayer(detectedPlayer);
                 break;
             case State.ChaseEnded:
-                GetBackIntoBoundaries();
+                StartCoroutine(WaitAndResumeMovement());
                 break;
         }
     }
@@ -209,11 +213,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (transform.position.x < boundaryXPosition.x && canDetectDirectionChange)
         {
+
             state = State.ChangingDirection;
         }
 
         if (transform.position.x > boundaryX2Position.x && canDetectDirectionChange)
         {
+
             state = State.ChangingDirection;
         }
     }
@@ -236,7 +242,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool IsInBoundaries()
     {
-        return (transform.position.x < boundaryX2Position.x && transform.position.x > boundaryXPosition.x);
+        return transform.position.x < boundaryX2Position.x || transform.position.x > boundaryXPosition.x;
     }
     private bool GroundCheck()
     {
@@ -274,10 +280,10 @@ public class EnemyAI : MonoBehaviour
         int maxWaitTime = 4;
         canMove = false;
         canDetectDirectionChange = false;
-        yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         dirX *= -1;
+        yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         canMove = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2);
         canDetectDirectionChange = true;
     }
 
@@ -297,6 +303,7 @@ public class EnemyAI : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         canMove = true;
+        GetBackIntoBoundaries();
     }
 
 }

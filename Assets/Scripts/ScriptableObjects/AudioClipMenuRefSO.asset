@@ -16,3 +16,14 @@ MonoBehaviour:
   playerJump: {fileID: 8300000, guid: 359777e2d99773743aa38a30bc0b78ef, type: 3}
   jumpPadBoink: {fileID: 8300000, guid: 76b72a9ccbc9cd84b856b0c52c745f94, type: 3}
   soundEffectMenuReference: {fileID: 8300000, guid: 2aae6922a2b471b4ca88a68ce49b95aa, type: 3}
+  congratulationsSound: {fileID: 8300000, guid: d9fe65d8cfef4ad4b9400a14a93cdc60, type: 3}
+  footstepSound:
+  - {fileID: 8300000, guid: 1d7e7e6569aab5a45a837f470eaddc8b, type: 3}
+  - {fileID: 8300000, guid: 31be579b280d0bc459635877e8c45aee, type: 3}
+  - {fileID: 8300000, guid: c3f3efc1106f84643a38bd21f6826aaf, type: 3}
+  - {fileID: 8300000, guid: 2de8329adc6f9b944a5ab0875fb59924, type: 3}
+  - {fileID: 8300000, guid: f39f1d43c5b9fbf449e7b39d056e5aad, type: 3}
+  creakyPointerSound: {fileID: 8300000, guid: f61d7143ba79489479d0755ac07661ad, type: 3}
+  woodenSound:
+  - {fileID: 8300000, guid: 474da5157f84a02419f765822469e9e4, type: 3}
+  - {fileID: 8300000, guid: a3a143c023123b141bd9c97f72f4b865, type: 3}

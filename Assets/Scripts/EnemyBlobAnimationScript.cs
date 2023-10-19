@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBlobAnimationScript : MonoBehaviour
 {
     private const string IS_MOVING = "isMoving";
-    private const string BLOB_DEATH = "BlobDeath";
+    private const string BLOB_DEATH = "blobDeath";
     [SerializeField] private Transform enemyTransform;
     private EnemyAI enemyAI;
     private Enemy enemy;
@@ -25,7 +25,7 @@ public class EnemyBlobAnimationScript : MonoBehaviour
 
     private void enemy_onEnemyDeath(object sender, EventArgs e)
     {
-        animator.Play(BLOB_DEATH);
+        animator.SetTrigger(BLOB_DEATH);
     }
 
     private void Update()

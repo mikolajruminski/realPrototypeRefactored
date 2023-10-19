@@ -5,8 +5,14 @@ using System;
 
 public class KeyBehaviourScript : Item
 {
+    public static event EventHandler OnAnyKeyPicked;
     public event EventHandler OnInteractDetected;
     public event EventHandler OnInteractableEnded;
+
+    public static void ResetStaticData()
+    {
+        OnAnyKeyPicked = null;
+    }
 
     public override void Interact()
     {
@@ -15,6 +21,7 @@ public class KeyBehaviourScript : Item
             InventoryManager.Instance.AddItems(allItemsSO.ItemType);
             KeysUIScript.Instance.AdjustKeys();
             Player.Instance.ClearLastInteractable();
+            OnAnyKeyPicked?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
 
         }

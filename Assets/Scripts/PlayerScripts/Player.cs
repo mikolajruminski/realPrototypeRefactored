@@ -8,7 +8,15 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
+
+
     public event EventHandler OnDirectionChanged;
+    public event EventHandler OnPlayerJumped;
+    public event EventHandler OnPlayerLanded;
+    public event EventHandler OnPlayerDashed;
+    public event EventHandler OnPlayerGripped;
+
+
     [SerializeField] private GameInput gameInput;
     private Rigidbody2D playerRB;
 
@@ -37,6 +45,7 @@ public class Player : MonoBehaviour
     private float jumpingForce = 10f;
     private float fallMultiplier = 4f;
     private float playerGravity;
+    private bool isGroundedVariable;
 
     [Header("Knockbacking")]
     [SerializeField] private float knockbackForce = 15f;
@@ -87,10 +96,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (isKnockbacking || isKnockbacking || !GameManager.Instance.GetIsGameActive())
+        if (isKnockbacking | !GameManager.Instance.GetIsGameActive())
         {
             return;
         }
+        if (GroundCheck() && isGroundedVariable == false)
+        {
+            OnPlayerLanded?.Invoke(this, EventArgs.Empty);
+        }
+
+        isGroundedVariable = GroundCheck();
 
         DoubleJumpReset();
         FlipSprite();
@@ -100,7 +115,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isDashing || isKnockbacking || !GameManager.Instance.GetIsGameActive())
+        if (isDashing | isKnockbacking | !GameManager.Instance.GetIsGameActive())
         {
             return;
         }
@@ -147,59 +162,6 @@ public class Player : MonoBehaviour
         {
             lastInteractable.HideInteractableButton();
         }
-        /*
-                if (lastInteractable != null)
-                {
-                    if (lastRaycastHit2D.collider.TryGetComponent(out IInteractable interactable1))
-                    {
-                        if (interactable1 == lastInteractable)
-                        {
-                            lastInteractable.ShowInteractableButton();
-                        }
-                        else
-                        {
-                            lastInteractable.HideInteractableButton();
-                        }
-                    }
-                    else
-                    {
-                        lastInteractable.HideInteractableButton();
-                    }
-
-                }
-        */
-
-        /*
-                if (raycastHit2D.collider != null && raycastHit2D.collider.TryGetComponent(out IInteractable interactable))
-                {
-                    lastInteractable = interactable;
-                    lastRaycastHit2D = raycastHit2D;
-
-                    if (distance < minInteractDistance && lastInteractable.isActive)
-                    {
-                        lastInteractable.ShowInteractableButton();
-                    }
-
-
-                }
-                if (distance != 0)
-                {
-                    if (distance > maxInteractDistance)
-                    {
-                        lastInteractable.HideInteractableButton();
-                    }
-                }
-
-
-                if (lastInteractable != null && raycastHit2D == true)
-                {
-                    if (lastInteractable != raycastHit2D.collider.GetComponent<IInteractable>())
-                    {
-                        lastInteractable.HideInteractableButton();
-                    }
-                }
-
-        */
     }
 
     private RaycastHit2D RayCastInteractable()
@@ -268,31 +230,41 @@ public class Player : MonoBehaviour
     //Jumping section
     private void gameInput_OnJumpPerformed(object sender, EventArgs e)
     {
-        if (GroundCheck())
+        if (GameManager.Instance.GetIsGameActive())
         {
-            playerRB.velocity = Vector2.up * jumpingForce;
+            if (GroundCheck())
+            {
+                playerRB.velocity = Vector2.up * jumpingForce;
+                OnPlayerJumped?.Invoke(this, EventArgs.Empty);
+            }
+
+            if (playerRB.velocity.y != 0 && canDoubleJump)
+            {
+                playerRB.velocity = Vector2.up * jumpingForce;
+                canDoubleJump = false;
+                OnPlayerJumped?.Invoke(this, EventArgs.Empty);
+            }
+
+            if (canClimb)
+            {
+                canClimb = false;
+                playerRB.velocity = Vector2.up * jumpingForce;
+                canDoubleJump = true;
+                OnPlayerJumped?.Invoke(this, EventArgs.Empty);
+            }
         }
 
-        if (playerRB.velocity.y != 0 && canDoubleJump)
-        {
-            playerRB.velocity = Vector2.up * jumpingForce;
-            canDoubleJump = false;
-        }
-
-        if (canClimb)
-        {
-            canClimb = false;
-            playerRB.velocity = Vector2.up * jumpingForce;
-            canDoubleJump = true;
-        }
 
     }
 
     private void gameInput_OnJumpReleased(object sender, EventArgs e)
     {
-        if (playerRB.velocity.y > 0)
+        if (GameManager.Instance.GetIsGameActive())
         {
-            playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y * 0.5f);
+            if (playerRB.velocity.y > 0)
+            {
+                playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y * 0.5f);
+            }
         }
     }
 
@@ -308,15 +280,20 @@ public class Player : MonoBehaviour
 
     private void gameInput_OnDashPerformed(object sender, EventArgs e)
     {
-        if (canDash && playerRB.velocity.x != 0)
+        if (GameManager.Instance.GetIsGameActive())
         {
-            StartCoroutine(PerformDash());
+            if (canDash && playerRB.velocity.x != 0)
+            {
+                StartCoroutine(PerformDash());
+            }
         }
+
 
     }
 
     private IEnumerator PerformDash()
     {
+        OnPlayerDashed.Invoke(this, EventArgs.Empty);
         isDashing = true;
         canDash = false;
 
@@ -350,12 +327,15 @@ public class Player : MonoBehaviour
         {
             climbingPosition = GetComponentInChildren<LedgeDetection>().transform.position + ledgePositionOffset;
             canClimb = true;
+            OnPlayerGripped?.Invoke(this, EventArgs.Empty);
+
         }
 
         if (ledgeDetection && !isFacingRight)
         {
             climbingPosition = GetComponentInChildren<LedgeDetection>().transform.position + new Vector3(-ledgePositionOffset.x, ledgePositionOffset.y);
             canClimb = true;
+            OnPlayerGripped?.Invoke(this, EventArgs.Empty);
         }
 
         if (canClimb)
@@ -364,6 +344,7 @@ public class Player : MonoBehaviour
             isHoldingLedge = true;
             transform.position = climbingPosition;
             playerRB.velocity = new Vector2(0, 0);
+
         }
         if (!canClimb)
         {
@@ -447,16 +428,20 @@ public class Player : MonoBehaviour
 
     private IEnumerator knockbackEffect(Vector2 distance)
     {
-        canMove = false;
-        isKnockbacking = true;
-        playerRB.gravityScale = 0;
-        playerRB.AddForce(distance, ForceMode2D.Impulse);
+        if (GameManager.Instance.GetIsGameActive())
+        {
+            canMove = false;
+            isKnockbacking = true;
+            playerRB.gravityScale = 0;
+            playerRB.AddForce(distance, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.4f);
-        playerRB.gravityScale = playerGravity;
-        playerRB.velocity = new Vector2(playerRB.velocity.x * 0.5f, playerRB.velocity.y);
-        isKnockbacking = false;
-        canMove = true;
+            yield return new WaitForSeconds(0.4f);
+            playerRB.gravityScale = playerGravity;
+            playerRB.velocity = new Vector2(playerRB.velocity.x * 0.5f, playerRB.velocity.y);
+            isKnockbacking = false;
+            canMove = true;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -474,7 +459,29 @@ public class Player : MonoBehaviour
                 Vector2 distance = new Vector2(transform.position.x - other.transform.position.x, 0).normalized * knockbackForce;
                 StartCoroutine(knockbackEffect(distance));
             }
-
         }
+
+        if (other.gameObject.TryGetComponent(out ObstaclesScript component))
+        {
+            float spikesKnockbackMultiplier = 0.5f;
+            if (PlayerDamage.Instance.CanGetDamaged())
+            {
+                PlayerDamage.Instance.Damage(other.gameObject.GetComponent<ObstaclesScript>().GetDamage());
+                Vector2 distance = new Vector2(other.transform.position.x - transform.position.x, other.transform.position.y - transform.position.y).normalized * knockbackForce * spikesKnockbackMultiplier;
+                StartCoroutine(knockbackEffect(distance));
+            }
+        }
+
+        if (other.gameObject.TryGetComponent(out BombBehaviour bombBehaviour))
+        {
+            float bombKnockbackMultiplier = 0.5f;
+            if (PlayerDamage.Instance.CanGetDamaged())
+            {
+                PlayerDamage.Instance.Damage(other.gameObject.GetComponent<BombBehaviour>().GetDamage());
+                Vector2 distance = new Vector2(transform.position.x - other.transform.position.x, transform.position.y - other.transform.position.y).normalized * knockbackForce * bombKnockbackMultiplier;
+                StartCoroutine(knockbackEffect(distance));
+            }
+        }
+
     }
 }

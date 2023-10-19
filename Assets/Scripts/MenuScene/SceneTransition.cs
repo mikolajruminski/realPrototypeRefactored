@@ -48,7 +48,7 @@ public class SceneTransition : MonoBehaviour
         float currentTime = 0;
         while (currentTime < transitionTime)
         {
-            currentTime += Time.deltaTime;
+            currentTime += Time.unscaledDeltaTime;
             transaitionMaterial.SetFloat(PROPERTY_NAME, Mathf.Clamp01(currentTime));
             yield return null;
         }
@@ -58,7 +58,7 @@ public class SceneTransition : MonoBehaviour
         float currentTime = transitionTime;
         while (currentTime > 0)
         {
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.unscaledDeltaTime;
             transaitionMaterial.SetFloat(PROPERTY_NAME, Mathf.Clamp01(currentTime));
             yield return null;
         }

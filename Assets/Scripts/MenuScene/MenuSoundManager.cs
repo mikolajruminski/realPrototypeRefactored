@@ -9,6 +9,7 @@ public class MenuSoundManager : MonoBehaviour
     [SerializeField] private AudioClipMenuRefSO audioClipMenuRefSO;
     [SerializeField] private AudioSource audioSource;
     private float volume = .5f;
+    private float congratulationsScreenSoundsMultiplier = 0.1f;
 
     private void Awake()
     {
@@ -46,4 +47,27 @@ public class MenuSoundManager : MonoBehaviour
     {
         return volume;
     }
+
+    public void PlayCongratulationsSound()
+    {
+        audioSource.clip = audioClipMenuRefSO.congratulationsSound;
+        audioSource.volume = volume;
+        audioSource.Play();
+    }
+
+    public void PlayFootstepSound()
+    {
+        AudioSource.PlayClipAtPoint(audioClipMenuRefSO.footstepSound[Random.Range(0, audioClipMenuRefSO.footstepSound.Length)], Camera.main.transform.position, volume * congratulationsScreenSoundsMultiplier);
+    }
+    public void PlayCreakyPointerSound()
+    {
+        AudioSource.PlayClipAtPoint(audioClipMenuRefSO.creakyPointerSound, Camera.main.transform.position, volume * congratulationsScreenSoundsMultiplier);
+    }
+    public void PlayWoodenSound(int x)
+    {
+        AudioSource.PlayClipAtPoint(audioClipMenuRefSO.woodenSound[x], Camera.main.transform.position, volume * congratulationsScreenSoundsMultiplier);
+    }
+
+
+
 }

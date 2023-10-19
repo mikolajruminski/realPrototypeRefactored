@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,14 @@ using UnityEngine;
 public class BombSpawner : MonoBehaviour
 {
     private const string SPAWN_BOMB_METHOD = "SpawnBomb";
+
+    public static event EventHandler OnAnyBombSpawned;
+    public event EventHandler OnCanonShot;
+
+    public static void ResetStaticData()
+    {
+        OnAnyBombSpawned = null;
+    }
 
     private enum State
     {
@@ -89,15 +98,18 @@ public class BombSpawner : MonoBehaviour
 
     private void StartSpawning()
     {
-        if (canSpawn)
-        {
-            InvokeRepeating(SPAWN_BOMB_METHOD, timeFromStart, repeatRate);
-        }
+        InvokeRepeating(SPAWN_BOMB_METHOD, timeFromStart, repeatRate);
     }
 
     private void SpawnBomb()
     {
-        Instantiate(bombPrefab, activeSpawnPoint.transform);
+        if (canSpawn)
+        {
+            Instantiate(bombPrefab, activeSpawnPoint.transform);
+            OnAnyBombSpawned?.Invoke(this, EventArgs.Empty);
+            OnCanonShot?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     private void SetActiveSpawnPoint(int index)

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BombBehaviour : MonoBehaviour
 {
+    public event EventHandler OnBombDestroyed;
+    private int damage = 2;
     private Rigidbody2D bombRb;
     private float degreesPerSecond = -800;
     public enum State
@@ -47,7 +50,11 @@ public class BombBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        OnBombDestroyed?.Invoke(this, EventArgs.Empty);
+
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        gameObject.GetComponent<Collider2D>().isTrigger = true;
+        this.enabled = false;
     }
 
     public void SetBombState(State state)
@@ -63,6 +70,16 @@ public class BombBehaviour : MonoBehaviour
     public void SetForce(float force)
     {
         this.force = force;
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+
+    public int GetDamage() 
+    {
+        return damage;
     }
 
 }

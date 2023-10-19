@@ -6,6 +6,7 @@ using UnityEngine;
 public class ExitDoorVisualScript : MonoBehaviour
 {
     [SerializeField] ExitDoorScript exitDoorScript;
+    public event EventHandler OnExitAnimationEnd;
     private const string DOOR_OPENING_ANIMATION = "DoorOpeningAnimation";
     private Animator animator;
     private void Awake()
@@ -22,12 +23,10 @@ public class ExitDoorVisualScript : MonoBehaviour
 
     private IEnumerator DoorOpeningAnimation()
     {
-        Player.Instance.canMove = false;
         animator.Play(DOOR_OPENING_ANIMATION);
         CinemachineLookAtScript.Instance.ChangeTarget(transform);
         yield return new WaitForSeconds(2);
-        exitDoorScript.StartEndingLevel();
-        
+        OnExitAnimationEnd?.Invoke(this, EventArgs.Empty);
     }
 
 }

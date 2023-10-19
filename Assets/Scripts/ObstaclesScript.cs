@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ObstaclesScript : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D other)
+    private int damage = 1;
+
+
+    public int GetDamage() 
     {
-        if (other.collider.TryGetComponent(out IDamageable component))
-        {
-            component.Damage(1);
-        }
+        return damage;
     }
 }

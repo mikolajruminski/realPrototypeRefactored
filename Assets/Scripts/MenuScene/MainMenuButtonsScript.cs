@@ -72,8 +72,7 @@ public class MainMenuButtonsScript : MonoBehaviour
         OnSceneTransitionBegin?.Invoke(this, EventArgs.Empty);
 
         yield return new WaitForSecondsRealtime(3);
-        EditorApplication.isPlaying = false;
-        Application.Quit();
+        Application.Quit(); 
     }
 
     public void Show()

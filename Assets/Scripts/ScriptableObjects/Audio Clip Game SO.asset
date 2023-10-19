@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fba8012c2356f549bd3def594710f0c, type: 3}
+  m_Name: Audio Clip Game SO
+  m_EditorClassIdentifier: 
+  runSounds:
+  - {fileID: 8300000, guid: 9e68ea1ebd76aa44c8cfa5beb9850830, type: 3}
+  - {fileID: 8300000, guid: 1deb201b8bf8f89479323a74e421150b, type: 3}
+  - {fileID: 8300000, guid: 7c518e8469a403b4c981664ecb28a79a, type: 3}
+  - {fileID: 8300000, guid: 1f2844efbf7abf647ba3d75d510f823a, type: 3}
+  - {fileID: 8300000, guid: fa95ebee958fb0e41a42a832aab767eb, type: 3}
+  - {fileID: 8300000, guid: 0cfeb72dea261a54cb7672590d2d1656, type: 3}
+  - {fileID: 8300000, guid: 924e3e09c67130946a6d7b666e8b8b68, type: 3}
+  - {fileID: 8300000, guid: 6da235e2573048249bcbe608f984ff48, type: 3}
+  - {fileID: 8300000, guid: fdc05ea2699023143ba7e93533cc5a0b, type: 3}
+  - {fileID: 8300000, guid: f26cf9ded47cf0140957490a16f85acc, type: 3}
+  jumpSounds:
+  - {fileID: 8300000, guid: 359777e2d99773743aa38a30bc0b78ef, type: 3}
+  headStomperSound:
+  - {fileID: 8300000, guid: 8f78aa0fd18a87f4786451496563f232, type: 3}
+  landSounds:
+  - {fileID: 8300000, guid: 7131d701ae015a54aa3d856feccd513f, type: 3}
+  - {fileID: 8300000, guid: 942019cf9ecd5854ebeb343b12b7f779, type: 3}
+  dashSounds:
+  - {fileID: 8300000, guid: 2aae6922a2b471b4ca88a68ce49b95aa, type: 3}
+  gripSounds:
+  - {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}
+  - {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
+  - {fileID: 8300000, guid: 856b6d74addb9ad4ab2b7b47bae3e839, type: 3}
+  - {fileID: 8300000, guid: f2bc9c36f73ea50419060ec6eb40c246, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: 7defe6f881827084db0c52efece6dd5c, type: 3}
+  enemyHitSounds:
+  - {fileID: 8300000, guid: 78043382db1360a4aafdc75a6d94ee6b, type: 3}
+  playerDeathSounds:
+  - {fileID: 8300000, guid: 1f7e9e11eab5b9849a75db0ebc744dfd, type: 3}
+  enemyDeathSounds:
+  - {fileID: 8300000, guid: 78043382db1360a4aafdc75a6d94ee6b, type: 3}
+  objectPickUp:
+  - {fileID: 8300000, guid: 9ca6be2a754f3584d8f7cc8ed2e75bdc, type: 3}
+  launchBomb:
+  - {fileID: 8300000, guid: 12d2b9d922fdd174383663d9490053d9, type: 3}
+  bombExplosion:
+  - {fileID: 8300000, guid: 3563453b6c0adda4c989ce555d7918b2, type: 3}
+  enemyRun:
+  - {fileID: 8300000, guid: 39acb4c85ae499241884820b8ac00661, type: 3}
+  jumpPadSound:
+  - {fileID: 8300000, guid: bc6f2c4e173e4aa4a867a20b31d4dfcf, type: 3}
+  exitDoorSounds:
+  - {fileID: 8300000, guid: 7da9ae0a4bb365540aed9a1d30d6af88, type: 3}
+  pauseMenuOpenSound: {fileID: 8300000, guid: 653222b3554290d42b357cdc6163cb74, type: 3}
+  pauseMenuRefSound: {fileID: 8300000, guid: 2aae6922a2b471b4ca88a68ce49b95aa, type: 3}
+  changingDirection: {fileID: 8300000, guid: 89024d65ecc31884b8ff35b97efa8dcc, type: 3}

@@ -37,9 +37,12 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     public void Damage(int damageAmount)
     {
         playerHealth -= damageAmount;
-        OnGetDamaged?.Invoke(this, EventArgs.Empty);
-        StartCoroutine(GetDamageCountdown());
 
+        if (playerHealth > 0)
+        {
+            OnGetDamaged?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(GetDamageCountdown());
+        }
         if (playerHealth <= 0)
         {
             PlayerDeath();
@@ -48,10 +51,11 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     private void PlayerDeath()
     {
+        Time.timeScale = 0f;
         OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        Player.Instance.GetPlayerRB().velocity = new Vector2(0, 0);
         GameManager.Instance.SetIsGameActive(false);
         canGetDamaged = false;
-        Time.timeScale = 0f;
         StartCoroutine(GameResetOnDeath());
     }
 
@@ -66,6 +70,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     {
         yield return new WaitForSecondsRealtime(4);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public bool CanGetDamaged()

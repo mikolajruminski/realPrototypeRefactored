@@ -8,6 +8,7 @@ public class LoaderCallback : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         StartCoroutine(LoadSceneDelay());
     }
 

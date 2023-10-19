@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public static class Loader
 {
-    private static int LoadSceneDelayTime = 2;
-
     public enum Scene
     {
         CongratulationsScene,

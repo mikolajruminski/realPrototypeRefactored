@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
-    public static GameInput Instance;
+    public static GameInput Instance { get; private set; }
     public event EventHandler OnJumpPerformed;
     public event EventHandler OnJumpReleased;
     public event EventHandler OnDashPerformed;
+    public event EventHandler OnPausePerformed;
     public event EventHandler OnInteractPerformed;
     public event EventHandler OnMovementReleased;
 
@@ -18,6 +19,7 @@ public class GameInput : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
         playerInputActions = new PlayerInputActions();
         playerInputActions.Movement.Enable();
         playerInputActions.Movement.Move.canceled += playerInputActions_Movement_Move_cancelled;
@@ -25,6 +27,23 @@ public class GameInput : MonoBehaviour
         playerInputActions.Movement.Jump.canceled += playerInputActions_Movement_Jump_canceled;
         playerInputActions.Movement.Dash.performed += playerInputActions_Movement_Dash_performed;
         playerInputActions.Movement.Interact.performed += playerInputActions_Movement_Interact_performed;
+        playerInputActions.Movement.Pause.performed += playerInputActions_Movement_Pause_performed;
+    }
+
+    private void playerInputActions_Movement_Pause_performed(InputAction.CallbackContext context)
+    {
+        OnPausePerformed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnDestroy()
+    {
+        playerInputActions.Movement.Move.canceled -= playerInputActions_Movement_Move_cancelled;
+        playerInputActions.Movement.Jump.performed -= playerInputActions_Movement_Jump_performed;
+        playerInputActions.Movement.Jump.canceled -= playerInputActions_Movement_Jump_canceled;
+        playerInputActions.Movement.Dash.performed -= playerInputActions_Movement_Dash_performed;
+        playerInputActions.Movement.Interact.performed -= playerInputActions_Movement_Interact_performed;
+
+        playerInputActions.Dispose();
     }
 
     private void playerInputActions_Movement_Jump_performed(InputAction.CallbackContext callbackContext)

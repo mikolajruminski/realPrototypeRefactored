@@ -29,6 +29,7 @@ public class OptionsScreenMenuScript : MonoBehaviour
         {
             menuSoundManager.ChangeVolume();
             UpdateVisual();
+            menuSoundManager.PlaySoundMenuRef();
         });
         backButton.onClick.AddListener(() =>
         {
